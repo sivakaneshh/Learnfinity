@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family:'poppins',sans-serif;
+    text-decoration:none;
+}
+header{
+    width:80vw;
+    height:80px;
+    margin:0 auto;
+    border-radius:0 0 10px 10px;
+    box-shadow:5px 5px 8px rgba(105,105,105,0.3),
+    -5px -5px 7px rgba(105,105,105,0.3);
+}
+header .navbar{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: space-between;
+    padding:0 10%;
+    align-items: center;
+}
+.color-danger{
+    color:red ;
+}
+.nav-bar-text{
+    width:20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight:600;
+}
+.course-container{
+    width:80vw;
+    margin:40px auto;
+}
+.course{
+    height:auto;
+    width:100%;
+    border:2px solid rgba(105,105,105,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: start;
+    margin:30px 0;
+}
+.drop-drop-btn{
+    transition: all 0.9s ease-in-out;
+}
+.coursetext{
+    margin-top: 20px;
+    width:100%;
+    padding:10px 25px;
+    display: flex;
+    align-items: center;
+}
+.description{
+    width:80%;
+}
+.drop-down-btn[data-dropdown = "true"]{
+    transform: rotate(180deg);
+}
+.course-content {
+    display: flex;
+    transition: all 0.3s ease; 
+    justify-content: space-around;
+    align-items: center;
+    width:100%;
+    height:auto;
+    display: none;
+}
+
+.course.expanded {
+    height: 350px; 
+}
+.container{
+    width:100%;
+    display: flex;
+}
+.box{
+    height:auto;
+    width:125px;
+    border:2px solid black;
+    border-radius:5px;
+    overflow: hidden;
+}
+.course-content img{
+    width:125px;
+    height:125px;
+    object-fit: cover;
+}
+
+.course-level{
+    display: flex;
+    transition: all 0.3s ease; 
+    justify-content: space-around;
+    align-items: center;
+    width:100%;
+    height:auto;
+    display: none;
+    margin: 5px 0;
+    font-weight: 600;
+}
