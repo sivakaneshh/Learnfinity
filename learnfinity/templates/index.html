@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="content-btn">
-            <a href="{% url 'quiz'%}"><button class="enroll-btn">Start Learning</button></a>
+            <a href="{% url 'quiz' %}"><button class="enroll-btn">Start Learning</button></a>
           </div>
         </div>
         <div class="right-container">
@@ -45,9 +45,9 @@
         <h1>Top-courses:</h1>
         <div class="courses">
           <ul>
-            <li>AI</li>
-            <li>Cyber security</li>
-            <li>Block chain</li>
+            <a href="{% url 'ai' %}"><li>AI</li></a>
+            <a href="{% url 'cys' %}"><li>Cyber security</li></a>
+            <a href="{% url 'blockchain' %}"><li>Block chain</li></a>
           </ul>
         </div>
       </div>
