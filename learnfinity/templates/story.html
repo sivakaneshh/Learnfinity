@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comedy Story Narration</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffeb3b, #ffcccb);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #3f51b5;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .story-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 20px;
+        }
+        .story {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #3f51b5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #303f9f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comedy Story Time!</h1>
+    <div class="story-container">
+        <p class="story" id="storyContent">
+            Once upon a time in a little village, there was a chicken named Clucky who wanted to be a superstar. Clucky had big dreams of performing on stage, but every time she tried, all she could do was lay eggs. One day, she decided to hold a concert to show her talents.
+            <br><br>
+            She invited all the farm animals: the cows, pigs, and even the grumpy old goat. The concert began, and Clucky strutted her stuff. She sang, danced, and... laid an egg. The audience was confused, but they cheered anyway. 
+            <br><br>
+            Then, the pig shouted, “Clucky! You should be a comedian! You’re egg-cellent at making us laugh!” Everyone burst into laughter, and from that day on, Clucky became the village’s favorite comedian. 
+            <br><br>
+            The moral of the story? Sometimes you find your true calling in the most unexpected way... even if it involves laying a few eggs along the way!
+        </p>
+    </div>
+    <button onclick="playNarration()">Listen to the Story</button>
+    <div class="footer">Isn't Clucky just egg-cellent?</div
