@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import MathProblem
 from django.http import JsonResponse
 
+
+
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -27,3 +31,9 @@ def cys(request):
 
 def blockchain(request):
     return render(request, 'blockchain.html')
+
+def login_view(request):
+    return render(request, 'login.html')
+
+def register_view(request):
+    return render(request,'regis.html')
