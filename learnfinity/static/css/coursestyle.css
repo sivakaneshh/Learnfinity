@@ -41,8 +41,9 @@ header .navbar{
     width:100%;
     border:2px solid rgba(105,105,105,0.3);
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
+    align-items: start;
     margin:30px 0;
 }
 .drop-drop-btn{
@@ -60,4 +61,33 @@ header .navbar{
 }
 .drop-down-btn[data-dropdown = "true"]{
     transform: rotate(180deg);
+}
+.course-content {
+    display: flex;
+    transition: all 0.3s ease; 
+    justify-content: space-around;
+    align-items: center;
+    width:100%;
+    height:auto;
+    display: none;
+}
+
+.course.expanded {
+    height: 300px; 
+}
+.container{
+    width:100%;
+    display: flex;
+}
+.box{
+    height:125px;
+    width:125px;
+    border:2px solid rgb(0, 98, 255);
+    border-radius:5px;
+    overflow: hidden;
+}
+.course-content img{
+    width:125px;
+    height:125px;
+    object-fit: cover;
 }
