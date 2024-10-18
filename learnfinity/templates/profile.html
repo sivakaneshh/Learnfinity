@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="{% static 'css/css2.css' %}"> <!-- Adjust if using Django's static files -->
+</head>
+<body>
+    <header>
+        <div class="logo">MyLogo</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="profile">
+            <img src="./static/image-2" alt="Profile Picture" class="profile-pic">
+            <h1>John Doe</h1>
+            <h2>Web Developer</h2>
+            <p>A brief bio about myself.</p>
+        </section>
+        
+        <section class="contact-info">
+            <h3>Contact Information</h3>
+            <p>Email: john@example.com</p>
+            <p>Phone: (123) 456-7890</p>
+            <div class="social-links">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Twitter</a>
+                <a href="#" class="social-icon">LinkedIn</a>
+            </div>
+        </section>
+        
+        <section class="about-me">
+            <h3>About Me</h3>
+            <p>Detailed information about myself goes here.</p>
+        </section>
+        
+        <section class="projects">
+            <h3>Projects</h3>
+            <div class="project-item">
+                <h4>Project Title</h4>
+                <p>Short description of the project.</p>
+            </div>
+            <!-- Repeat for more projects -->
+        </section>
+        
+        <section class="testimonials">
+            <h3>Testimonials</h3>
+            <blockquote>
+                <p>"John is an excellent developer!"</p>
+                <footer>- A Happy Client</footer>
+            </blockquote>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+    </footer>
+</body>
+</html>

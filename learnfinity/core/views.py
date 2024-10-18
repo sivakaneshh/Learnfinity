@@ -27,3 +27,11 @@ def cys(request):
 
 def blockchain(request):
     return render(request, 'blockchain.html')
+
+def profile_view(request):
+    return render(request, 'profile.html')
+
+
+
+
+
