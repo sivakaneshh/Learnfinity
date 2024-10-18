@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Game</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffcccb, #ffeb3b);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #007bff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        #puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .puzzle-piece:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.3); /* Slightly darken on hover */
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #status {
+            margin: 20px;
+            font-size: 1.5em;
+            color: #ff5722;
+        }
+        #timer {
+            font-size: 1.5em;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Let's Solve the Puzzle!</h1>
+    <div id="timer">Time Left: 60</div>
+    <div id="status">Moves: 0</div>
+    <div id="puzzle-container"></div>
+    <script>
+        const puzzleContainer = document.getElementById('puzzle-container');
+        const statusDiv = document.getElementById('status');
+        const timerDiv = document.getElementById('timer');
+        const totalPieces = 9;
+        let emptyIndex = totalPieces - 1; // Last piece is empty
+        let moves = 0;
+        let timeLeft = 60; // Countdown time in seconds
+        let timerInterval;
+    
+        // Color palette for the puzzle pieces
+        const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#FFC300', '#DAF7A6', '#900C3F', '#C70039', '#581845'];
+    
+        // Initialize the puzzle
+        function initPuzzle() {
+            const pieces = Array.from({ length: totalPieces }, (_, i) => i);
+            shuffleArray(pieces);
+    
+            pieces.forEach((piece, index) => {
+                const pieceElement = document.createElement('div');
+                pieceElement.classList.add('puzzle-piece');
+                pieceElement.style.backgroundColor = piece !== 0 ? colors[piece] : 'transparent'; // Color pieces
+                pieceElement.textContent = piece !== 0 ? piece : ''; // Leave the last piece empty
+                pieceElement.dataset.index = index;
+                pieceElement.addEventListener('click', () => handlePieceClick(piece));
+                puzzleContainer.appendChild(pieceElement);
+            });
+    
+            startTimer(); // Start the countdown timer
+        }
+    
+        // Shuffle the array (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    
+        // Handle piece click
+        function handlePieceClick(piece) {
+            const pieceIndex = Number(piece);
+            const neighbors = getNeighbors(emptyIndex);
+    
+            if (neighbors.includes(pieceIndex)) {
+                movePiece(pieceIndex);
+                updateStatus();
+            }
+        }
+    
+        // Get neighboring indices for the empty piece
+        function getNeighbors(index) {
+            const neighbors = [];
+            const row = Math.floor(index / 3);
+            const col = index % 3;
+    
+            // Check neighbors
+            if (row > 0) neighbors.push(index - 3); // Up
+            if (row < 2) neighbors.push(index + 3); // Down
+            if (col > 0) neighbors.push(index - 1); // Left
+            if (col < 2) neighbors.push(index + 1); // Right
+    
+            return neighbors;
+        }
+    
+        // Move the piece with a smooth transition
+        function movePiece(index) {
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            const pieceElement = pieces[index];
+            const emptyElement = pieces[emptyIndex];
+    
+            // Animate the transition
+            pieceElement.style.transition = 'transform 0.3s ease';
+            emptyElement.style.transition = 'transform 0.3s ease';
+            pieceElement.style.transform = `translate(${(emptyIndex % 3) * 100}px, ${(Math.floor(emptyIndex / 3)) * 100}px)`;
+            emptyElement.style.transform = `translate(${(index % 3) * 100}px, ${(Math.floor(index / 3)) * 100}px)`;
+    
+            // Set a timeout to update the content after the transition
+            setTimeout(() => {
+                emptyElement.textContent = pieceElement.textContent; // Move piece to empty spot
+                pieceElement.textContent = ''; // Set moved piece to empty
+                pieceElement.style.transform = 'translate(0, 0)'; // Reset position
+                emptyIndex = index;
+                moves++;
+                pieceElement.style.transition = ''; // Reset transition for future moves
+            }, 300); // Match the timeout with the transition duration
+        }
+    
+        // Update status
+        function updateStatus() {
+            statusDiv.textContent = `Moves: ${moves}`;
+            if (isSolved()) {
+                clearInterval(timerInterval); // Stop the timer
+                setTimeout(() => {
+                    alert(`Congratulations! You've solved the puzzle in ${moves} moves.`);
+                    window.location.href = 'video.html'; // Redirect to video.html after solving
+                }, 100); // Delay alert slightly
+            }
+        }
+    
+        // Check if the puzzle is solved
+        function isSolved() {
+            const pieces = Array.from(document.querySelectorAll('.puzzle-piece'));
+            return pieces.every((piece, index) => piece.textContent == (index === emptyIndex ? '' : index));
+        }
+    
+        // Start the timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerDiv.textContent = `Time Left: ${timeLeft}`;
+    
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval); // Stop the timer
+                    alert("Time's up! Redirecting to video.html.");
+                    window.location.href = 'video.html'; // Redirect to video.html when time's up
+                }
+            }, 1000); // Update every second
+        }
+    
+        // Start the puzzle
+        initPuzzle();
+    </script>
+    
+</body>
+</html>
