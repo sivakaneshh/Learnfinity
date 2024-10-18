@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, math_problem_view, quiz_view,ai,cys,blockchain, login_view, register_view  # Import individual views
+from .views import coursedashboard, index, math_problem_view, quiz_view,ai,cys,blockchain, login_view, register_view  # Import individual views
 
 urlpatterns = [
     path('', index, name='index'),                       # Homepage
