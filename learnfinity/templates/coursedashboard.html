@@ -36,14 +36,25 @@
           </div>
           <div class="course-content">
             <div class="first-box box">
-                <img src="{% static 'image-3.png' %}" alt="img"/>
+              <img src="{% static 'image-3.png' %}" alt="img" />
             </div>
             <div class="second-box box">
-                <img src="{% static 'image-4.png' %}" alt="img"/>
+              <img src="{% static 'image-4.png' %}" alt="img" />
             </div>
             <div class="third-box box">
-                <img src="{% static 'image-5.png' %}" alt="img"/>
+              <img src="{% static 'image-5.png' %}" alt="img" />
             </div>
+          </div>
+          <div class="course-level">
+            <p class="level">
+                Level-1
+            </p>
+            <p class="level">
+                Level-2
+            </p>
+            <p class="level">
+                Level-3
+            </p>
           </div>
         </div>
         <div class="course-2 course">
@@ -60,14 +71,25 @@
           </div>
           <div class="course-content">
             <div class="first-box box">
-                <img src="{% static 'image-6.png' %}" alt="img"/>
+              <img src="{% static 'image-6.png' %}" alt="img" />
             </div>
             <div class="second-box box">
-                <img src="{% static 'image-7.jpg' %}" alt="img"/>
+              <img src="{% static 'image-7.jpg' %}" alt="img" />
             </div>
             <div class="third-box box">
-                <img src="{% static 'image-8.png' %}" alt="img"/>
+              <img src="{% static 'image-8.png' %}" alt="img" />
             </div>
+          </div>
+          <div class="course-level">
+            <p class="level">
+                Level-1
+            </p>
+            <p class="level">
+                Level-2
+            </p>
+            <p class="level">
+                Level-3
+            </p>
           </div>
         </div>
         <div class="course-3 course">
@@ -84,14 +106,25 @@
           </div>
           <div class="course-content">
             <div class="first-box box">
-                <img src="{% static 'image-9.jpg' %}" alt="img"/>
+              <img src="{% static 'image-9.jpg' %}" alt="img" />
             </div>
             <div class="second-box box">
-                <img src="{% static 'image-10.jpg' %}" alt="img"/>
+              <img src="{% static 'image-10.jpg' %}" alt="img" />
             </div>
             <div class="third-box box">
-                <img src="{% static 'image-11.jpg' %}" alt="img"/>
+              <img src="{% static 'image-11.jpg' %}" alt="img" />
             </div>
+          </div>
+          <div class="course-level">
+            <p class="level">
+                Level-1
+            </p>
+            <p class="level">
+                Level-2
+            </p>
+            <p class="level">
+                Level-3
+            </p>
           </div>
         </div>
         <div class="course-4 course">
@@ -108,14 +141,25 @@
           </div>
           <div class="course-content">
             <div class="first-box box">
-                <img src="{% static 'image-12.jpg' %}" alt="img"/>
+              <img src="{% static 'image-12.jpg' %}" alt="img" />
             </div>
             <div class="second-box box">
-                <img src="{% static 'image-13.jpg' %}" alt="img"/>
+              <img src="{% static 'image-13.jpg' %}" alt="img" />
             </div>
             <div class="third-box box">
-                <img src="{% static 'image-14.jpg' %}" alt="img"/>
+              <img src="{% static 'image-14.jpg' %}" alt="img" />
             </div>
+          </div>
+          <div class="course-level">
+            <p class="level">
+                Level-1
+            </p>
+            <p class="level">
+                Level-2
+            </p>
+            <p class="level">
+                Level-3
+            </p>
           </div>
         </div>
       </div>
@@ -127,6 +171,7 @@
         el.addEventListener('click', () => {
           const course = el.closest('.course')
           const courseContent = course.querySelector('.course-content')
+          const courseLevel = course.querySelector('.course-level')
       
           // Initialize the dropdown if not set
           if (!el.dataset.dropdown) {
@@ -137,11 +182,13 @@
           if (el.dataset.dropdown === 'false') {
             el.dataset.dropdown = 'true'
             course.classList.add('expanded')
-            courseContent.style.display = 'flex' // You may want to replace this with a CSS class for better control
+            courseContent.style.display = 'flex'
+            courseLevel.style.display = 'flex' // You may want to replace this with a CSS class for better control
           } else {
             el.dataset.dropdown = 'false'
             course.classList.remove('expanded')
-            courseContent.style.display = 'none' // Same as above
+            courseContent.style.display = 'none'
+            courseLevel.style.display = 'none' // Same as above
           }
         })
       })
