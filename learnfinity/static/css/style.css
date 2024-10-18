@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family:'poppins',sans-serif;
+    overflow:hidden;
+    text-decoration:none;
+}
+header{
+    width:80vw;
+    height:80px;
+    margin:0 auto;
+    border-radius:0 0 10px 10px;
+    box-shadow:5px 5px 8px rgba(105,105,105,0.3),
+    -5px -5px 7px rgba(105,105,105,0.3);
+}
+header .navbar{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: space-between;
+    padding:0 10%;
+    align-items: center;
+}
+.color-danger{
+    color:red ;
+}
+.nav-bar-btns{
+    width:20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-bar-btns .sign-in-btn{
+    padding:10px 12px;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    outline: none;
+    background:transparent;
+}
+
+.nav-bar-btns .register-btn{
+    padding:10px 12px;
+    cursor:pointer;
+    border:2px solid black;
+    border-radius:5px;
+    font-weight:600;
+    transition:all ease-in-out 3000;
+}
+.nav-bar-btns .register-btn:hover{
+    background-color:red;
+    color:white;
+    border:white;
+}
+.content-container{
+    width:80vw;
+    height:70vh;
+    margin:50px auto;
+    border-radius:10px;
+    position:relative;
+}
+.right-container{
+    position:absolute;
+    top:0;
+    left:0;
+}
+.right-container .image{
+    width:100%;
+    height: 100%;
+    overflow:hidden
+}
+.right-container img{
+    height:100%;
+    width:100%;
+    z-index:-10;
+    object-fit: cover;
+}
+.left-container{
+    z-index: 10;
+    position: absolute;
+    top:0;
+    left:0;
+    background: linear-gradient(to right, rgba(105,105,105,0.8), transparent );
+    height:100%;
+    width:40%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding:0 40px;
+    color:white;
+}
+.left-container .text-content{
+    height:20%;
+    width:80%;
+}
+.left-container .text-content .solgan{
+    font-size:2rem;
+}
+.left-container .text-content .description{
+    margin:20px 0;
+}
+.left-container .content-btn .enroll-btn{
+    padding:10px 80px;
+    border:2px solid white;
+    color:white;
+    border-radius:5px;
+    background: transparent;
+    transition:all ease-in-out 3000;
+    
+}
+.left-container .content-btn .enroll-btn:hover{
+    background-color: red;
+    border: 2px solid red;
+}
+.top-course{
+    width:80vw;
+    height:100px;
+    margin:0 auto;
+    overflow: hidden;
+}
+.courses ul{
+    width:100%;
+    height:50px;
+    margin:10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.courses ul li{
+    display: inline-block;
+    border:2px solid red;
+    padding:5px 8px;
+    border-radius:5px;
+    color:red;
+    background: transparent;
+    font-weight:600;
+    transition: all ease-in-out 3000;
+    cursor:pointer;
+}
+.courses ul li:hover{
+    background-color: red;
+    color:white;
+}

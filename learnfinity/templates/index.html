@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnFinity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">
+          <h1>Learn<span class="color-danger">Finity</span></h1>
+        </div>
+        <div class="nav-bar-btns">
+          <button class="sign-in-btn">Sign in</button>
+          <button class="register-btn">Register for free</button>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="content-container">
+        <div class="left-container">
+          <div class="text-content">
+            <div class="text">
+              <h1 class="solgan">Enjoy to Learn ..</h1>
+              <p class="description">Study everything whatever enjoy and study it..</p>
+            </div>
+          </div>
+          <div class="content-btn">
+            <a href="{% url 'quiz' %}"><button class="enroll-btn">Start Learning</button></a>
+          </div>
+        </div>
+        <div class="right-container">
+          <div class="image">
+            <img src="./static/image-1.jpg" alt="sample-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="top-course">
+        <h1>Top-courses:</h1>
+        <div class="courses">
+          <ul>
+            <a href="{% url 'ai' %}"><li>AI</li></a>
+            <a href="{% url 'cys' %}"><li>Cyber security</li></a>
+            <a href="{% url 'blockchain' %}"><li>Block chain</li></a>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

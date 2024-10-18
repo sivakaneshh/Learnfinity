@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnFinity || Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .quiz-container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .question-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 5px;
+            background-color: #d3d3d3;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .progress {
+            width: 25%;
+            height: 100%;
+            background-color: #1DB954;
+            border-radius: 5px;
+        }
+        .option {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .option:hover {
+            border-color: #1DB954;
+        }
+        .option.selected {
+            background-color: #e6f7e6;
+            border-color: #1DB954;
+        }
+        .option img {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #1DB954;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .submit-button:hover {
+            background-color: #17a647;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    <div class="question-title">What's your top goal?</div>
+
+    <div class="option" data-answer="professional_growth">
+        <img src="path_to_icon1.png" alt="Icon 1">
+        <span>Professional growth</span>
+    </div>
+    <div class="option" data-answer="staying_sharp">
+        <img src="path_to_icon2.png" alt="Icon 2">
+        <span>Staying sharp</span>
+    </div>
+    <div class="option" data-answer="excelling_in_school">
+        <img src="path_to_icon3.png" alt="Icon 3">
+        <span>Excelling in school</span>
+    </div>
+    <div class="option" data-answer="helping_child_learn">
+        <img src="path_to_icon4.png" alt="Icon 4">
+        <span>Helping my child learn</span>
+    </div>
+    <div class="option" data-answer="something_else">
+        <img src="path_to_icon5.png" alt="Icon 5">
+        <span>Something else</span>
+    </div>
+
+    <button class="submit-button">Submit</button>
+</div>
+
+<script>
+    // JavaScript to handle option selection
+    const options = document.querySelectorAll('.option');
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            options.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+        });
+    });
+
+    document.querySelector('.submit-button').addEventListener('click', () => {
+        const selectedOption = document.querySelector('.option.selected');
+        if (selectedOption) {
+            alert('You selected: ' + selectedOption.dataset.answer);
+            // Send the answer to the server via AJAX or a form submission
+        } else {
+            alert('Please select an option.');
+        }
+    });
+</script>
+
+</body>
+</html>
