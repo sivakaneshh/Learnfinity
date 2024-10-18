@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family:'poppins',sans-serif;
     overflow:hidden;
+    text-decoration:none;
 }
 header{
     width:80vw;
@@ -108,6 +109,7 @@ header .navbar{
     border-radius:5px;
     background: transparent;
     transition:all ease-in-out 3000;
+    
 }
 .left-container .content-btn .enroll-btn:hover{
     background-color: red;
@@ -141,4 +143,7 @@ header .navbar{
 .courses ul li:hover{
     background-color: red;
     color:white;
+}
+.content-btn .enroll-btn .font{
+    
 }
