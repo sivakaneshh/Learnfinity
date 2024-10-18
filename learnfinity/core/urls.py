@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import coursedashboard, index, math_problem_view, quiz_view,ai,cys,blockchain, login_view, register_view,profile_view  # Import individual views
+from .views import coursedashboard, index, math_problem_view, quiz_view,ai,cys,blockchain, login_view, register_view,profile_view,puzzle,story,video  # Import individual views
 
 urlpatterns = [
     path('', index, name='index'),                       # Homepage
@@ -11,5 +11,9 @@ urlpatterns = [
     path('blockchain/', blockchain, name='blockchain'),
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
-    path('profile/', profile_view,name='profile'),               # Quiz page
+    path('profile/', profile_view,name='profile'),
+    path('video/', video,name='video'),
+    path('story/', story,name='story'),
+    path('puzzle/', puzzle,name='puzzle'),
+    path('video/puzzle/', puzzle, name='puzzle'),               # Quiz page
 ]

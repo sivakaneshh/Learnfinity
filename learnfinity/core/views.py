@@ -43,3 +43,12 @@ def register_view(request):
 
 def profile_view(request):
     return render(request,'profile.html')
+
+def video(request):
+    return render(request,'video.html')
+
+def puzzle(request):
+    return render(request,'puzzle.html')
+
+def story(request):
+    return render(request,'story.html')

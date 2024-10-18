@@ -153,7 +153,7 @@
                 emptyIndex = index;
                 moves++;
                 pieceElement.style.transition = ''; // Reset transition for future moves
-            }, 300); // Match the timeout with the transition duration
+            }, 100); // Match the timeout with the transition duration
         }
     
         // Update status
@@ -182,10 +182,10 @@
     
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval); // Stop the timer
-                    alert("Time's up! Redirecting to video.html.");
-                    window.location.href = 'video.html'; // Redirect to video.html when time's up
+                    alert("Time's up! Redirecting to video.");
+                    window.location.href = "{% url 'video' %}"; // Redirect to video.html when time's up
                 }
-            }, 1000); // Update every second
+            }, 100); // Update every second
         }
     
         // Start the puzzle
