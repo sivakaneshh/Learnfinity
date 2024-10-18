@@ -18,3 +18,12 @@ def quiz_view(request):
         return JsonResponse({'status': 'success', 'message': 'Answer received'})
 
     return render(request, 'quiz.html')
+
+def ai(request):
+    return render(request, 'ai.html')
+
+def cys(request):
+    return render(request, 'cys.html')
+
+def blockchain(request):
+    return render(request, 'blockchain.html')
