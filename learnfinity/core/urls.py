@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import index  # Ensure you are importing the view correctly
+from .views import index,math_problem_view
 
 urlpatterns = [
-    path('', index, name='index'),  # Map the root URL to the index view
+    path('', index, name='index'),
+    path('math', math_problem_view,name='math_problem')    # Map the root URL to the index view
 ]
