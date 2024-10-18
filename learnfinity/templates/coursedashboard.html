@@ -23,47 +23,98 @@
           <h1>Let's start Our Courses</h1>
         </div>
         <div class="course-1 course">
-          <div class="course-1-text coursetext">
-            <div class="course-heading">
-              <h1>Introduction to AI</h1>
-              <p class="description">Artificial Intelligence (AI) enables machines to mimic human intelligence and perform tasks like problem-solving and decision-making. It powers applications like virtual assistants, recommendation systems, and adaptive learning platforms.</p>
+          <div class="container">
+            <div class="course-1-text coursetext">
+              <div class="course-heading">
+                <h1>Introduction to AI</h1>
+                <p class="description">Artificial Intelligence (AI) enables machines to mimic human intelligence and perform tasks like problem-solving and decision-making. It powers applications like virtual assistants, recommendation systems, and adaptive learning platforms.</p>
+              </div>
+              <div class="drop-down-btn" data-dropdown="false">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
             </div>
-            <div class="drop-down-btn" data-dropdown="false">
-              <i class="fa-solid fa-arrow-down"></i>
+          </div>
+          <div class="course-content">
+            <div class="first-box box">
+                <img src="{% static 'image-3.png' %}" alt="img"/>
+            </div>
+            <div class="second-box box">
+                <img src="{% static 'image-4.png' %}" alt="img"/>
+            </div>
+            <div class="third-box box">
+                <img src="{% static 'image-5.png' %}" alt="img"/>
             </div>
           </div>
         </div>
         <div class="course-2 course">
-          <div class="course-2-text coursetext">
-            <div class="course-heading">
-              <h1>Basic of Block chain</h1>
-              <p class="description">Blockchain is a decentralized, digital ledger technology that securely records transactions across multiple computers in a way that makes it difficult to alter. It ensures transparency, security, and trust without the need for a central authority, making it popular for cryptocurrencies like Bitcoin.</p>
+          <div class="container">
+            <div class="course-2-text coursetext">
+              <div class="course-heading">
+                <h1>Basic of Block chain</h1>
+                <p class="description">Blockchain is a decentralized, digital ledger technology that securely records transactions across multiple computers in a way that makes it difficult to alter. It ensures transparency, security, and trust without the need for a central authority, making it popular for cryptocurrencies like Bitcoin.</p>
+              </div>
+              <div class="drop-down-btn" data-dropdown="false">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
             </div>
-            <div class="drop-down-btn" data-dropdown="false">
-              <i class="fa-solid fa-arrow-down"></i>
+          </div>
+          <div class="course-content">
+            <div class="first-box box">
+                <img src="{% static 'image-6.png' %}" alt="img"/>
+            </div>
+            <div class="second-box box">
+                <img src="{% static 'image-7.jpg' %}" alt="img"/>
+            </div>
+            <div class="third-box box">
+                <img src="{% static 'image-8.png' %}" alt="img"/>
             </div>
           </div>
         </div>
         <div class="course-3 course">
-          <div class="course-3-text coursetext">
-            <div class="course-heading">
-              <h1>Cyper security</h1>
-              <p class="description">
-                Cybersecurity is the practice of protecting systems, networks, and data from digital attacks, theft, and damage. It involves implementing technologies, processes, and practices to defend against unauthorized access, cyberattacks, and data breaches.</p>
+          <div class="container">
+            <div class="course-3-text coursetext">
+              <div class="course-heading">
+                <h1>Cyper security</h1>
+                <p class="description">Cybersecurity is the practice of protecting systems, networks, and data from digital attacks, theft, and damage. It involves implementing technologies, processes, and practices to defend against unauthorized access, cyberattacks, and data breaches.</p>
+              </div>
+              <div class="drop-down-btn" data-dropdown="false">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
             </div>
-            <div class="drop-down-btn" data-dropdown="false">
-              <i class="fa-solid fa-arrow-down"></i>
+          </div>
+          <div class="course-content">
+            <div class="first-box box">
+                <img src="{% static 'image-9.jpg' %}" alt="img"/>
+            </div>
+            <div class="second-box box">
+                <img src="{% static 'image-10.jpg' %}" alt="img"/>
+            </div>
+            <div class="third-box box">
+                <img src="{% static 'image-11.jpg' %}" alt="img"/>
             </div>
           </div>
         </div>
         <div class="course-4 course">
-          <div class="course-4-text coursetext">
-            <div class="course-heading">
-              <h1>Mathematics</h1>
-              <p class="description">Mathematics is the study of numbers, quantities, shapes, and patterns, providing a foundational framework for understanding and solving problems in various fields. It encompasses various branches, including algebra, geometry, calculus, and statistics, and is essential for disciplines like science, engineering, and finance.</p>
+          <div class="container">
+            <div class="course-4-text coursetext">
+              <div class="course-heading">
+                <h1>Mathematics</h1>
+                <p class="description">Mathematics is the study of numbers, quantities, shapes, and patterns, providing a foundational framework for understanding and solving problems in various fields. It encompasses various branches, including algebra, geometry, calculus, and statistics, and is essential for disciplines like science, engineering, and finance.</p>
+              </div>
+              <div class="drop-down-btn" data-dropdown="false">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
             </div>
-            <div class="drop-down-btn" data-dropdown="false">
-              <i class="fa-solid fa-arrow-down"></i>
+          </div>
+          <div class="course-content">
+            <div class="first-box box">
+                <img src="{% static 'image-12.jpg' %}" alt="img"/>
+            </div>
+            <div class="second-box box">
+                <img src="{% static 'image-13.jpg' %}" alt="img"/>
+            </div>
+            <div class="third-box box">
+                <img src="{% static 'image-14.jpg' %}" alt="img"/>
             </div>
           </div>
         </div>
@@ -74,10 +125,23 @@
       const dropDown = document.querySelectorAll('.drop-down-btn')
       dropDown.forEach((el) => {
         el.addEventListener('click', () => {
+          const course = el.closest('.course')
+          const courseContent = course.querySelector('.course-content')
+      
+          // Initialize the dropdown if not set
+          if (!el.dataset.dropdown) {
+            el.dataset.dropdown = 'false' // Set default state if not already set
+          }
+      
+          // Toggle the dropdown state
           if (el.dataset.dropdown === 'false') {
             el.dataset.dropdown = 'true'
+            course.classList.add('expanded')
+            courseContent.style.display = 'flex' // You may want to replace this with a CSS class for better control
           } else {
             el.dataset.dropdown = 'false'
+            course.classList.remove('expanded')
+            courseContent.style.display = 'none' // Same as above
           }
         })
       })
