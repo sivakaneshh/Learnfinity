@@ -23,6 +23,9 @@ def quiz_view(request):
 
     return render(request, 'quiz.html')
 
+def coursedashboard(request):
+    return render(request, 'coursedashboard.html')
+
 def ai(request):
     return render(request, 'ai.html')
 
