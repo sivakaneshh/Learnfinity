@@ -44,7 +44,8 @@ header .navbar{
 .nav-bar-btns .register-btn{
     padding:10px 12px;
     cursor:pointer;
-    border:2px solid black;
+    border:2px solid red;
+    color:red;  
     border-radius:5px;
     font-weight:600;
     transition:all ease-in-out 3000;
@@ -52,7 +53,6 @@ header .navbar{
 .nav-bar-btns .register-btn:hover{
     background-color:red;
     color:white;
-    border:white;
 }
 .content-container{
     width:80vw;
@@ -141,6 +141,15 @@ header .navbar{
     cursor:pointer;
 }
 .courses ul li:hover{
+    background-color: red;
+    color:white;
+}
+.streak{
+    padding:5px 10px;
+    border:2px solid red;
+    color:red;
+}
+.streak:hover{
     background-color: red;
     color:white;
 }
