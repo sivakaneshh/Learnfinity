@@ -61,3 +61,20 @@ header .navbar{
 .drop-down-btn[data-dropdown = "true"]{
     transform: rotate(180deg);
 }
+
+.exp-points {
+    height: auto;
+    width: 100%;
+    border: 2px solid rgba(105, 105, 105, 0.3);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px 0;
+    font-weight: bold; /* Makes the text bold */
+}
+
+  .course {
+    position: relative; /* This makes sure the exp-points div is positioned relative to the course container */
+  }
+  
+  
