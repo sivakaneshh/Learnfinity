@@ -1,141 +1,94 @@
-/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family:'poppins',sans-serif;
+    text-decoration:none;
+}
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f7fc;
-    color: #333;
+    font-family: 'poppins', sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
-}
-
-h1, h3 {
+    background-color: #f4f4f4;
     color: #333;
 }
 
-h1 {
-    font-size: 2.5rem;
+header{
+    width:80vw;
+    height:80px;
+    margin:0 auto;
+    border-radius:0 0 10px 10px;
+    box-shadow:5px 5px 8px rgba(105,105,105,0.3),
+    -5px -5px 7px rgba(105,105,105,0.3);
 }
-
-h3 {
-    font-size: 1.5rem;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #333;
-    padding: 10px 20px;
-}
-
-.navbar .logo h1 {
-    color: white;
-    font-size: 1.8rem;
-}
-
-.navbar .logo .danger {
-    color: #ff4d4d;
-}
-
-/* Profile Section */
-.profile {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-}
-
-.profile-header {
-    display: flex;
+header .navbar{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: space-between;
+    padding:0 10%;
     align-items: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
+}
+.danger{
+    color:red ;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ddd; /* Lighter color on hover */
+}
+
+.profile {
+    text-align: center;
+    padding: 50px 20px;
+    background: white;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
 }
 
 .profile-pic {
+    border-radius: 50%;
     width: 150px;
     height: 150px;
-    border-radius: 50%;
-    margin-right: 20px;
+    border: 5px solid red; /* Green border */
 }
 
-.profile-info {
-    flex-grow: 1;
-}
-
-/* Input Fields */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin: 12px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fafafa;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-input:focus,
-select:focus {
-    outline: none;
-    border-color: #ff4d4d;
-    box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
-}
-
-/* Phone Container */
-.phone-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.phone-container select,
-.phone-container input[type="tel"] {
-    width: 48%;
-}
-
-/* Update Button */
-.update-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.update-button:hover {
-    background-color: #e60000;
-    transform: translateY(-2px);
-}
-
-/* Contact Info Section */
-.contact-info {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-}
-
-.contact-details p {
+h1, h2 {
     margin: 10px 0;
-    display: flex;
-    align-items: center;
 }
 
-.contact-details i {
-    margin-right: 10px;
+.contact-info, .about-me, .projects, .testimonials {
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
 }
 
-/* Social Links */
+h3 {
+    border-bottom: 2px solid red;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
 .social-links {
     margin-top: 10px;
 }
@@ -143,55 +96,76 @@ select:focus {
 .social-icon {
     margin: 0 10px;
     text-decoration: none;
-    color: #555;
-    font-size: 1.2rem;
+    color: red;
     transition: color 0.3s;
 }
 
 .social-icon:hover {
-    color: #ff4d4d;
+    color: red; /* Darker green on hover */
 }
 
-/* About Me Section */
-.about-me {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
+.leader-board{
+    width:20vw;
+    height:55vh;
+    position:absolute;
+    top:20%;
+    left:30px;
+    border-radius:10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-.about-me p {
-    margin: 0;
-}
-
-/* Enrolled Courses Section */
-.projects {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-}
-
-.project-item {
-    margin-bottom: 15px;
-}
-
-.project-item h4 {
-    margin-bottom: 5px;
-}
-
-/* Footer */
-footer {
+.leader-heading{
+    width:100%;
     text-align: center;
-    padding: 20px 0;
-    background-color: #333;
-    color: white;
-    margin-top: 30px;
+}
+.leader-container{
+    width:90%;
+    height: 80%;
+    margin:2px auto;
+    display:flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding:5px;
+    border-radius:10px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.player{
+    width:100%;
+    height:auto;
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
+}
+.price{
+    font-weight:600;
 }
 
-
-
+.logout-btn{
+    position:absolute;
+    bottom:60px;
+    right:60px;
+    padding:5px 10px;
+    border:2px solid red;
+    color:red;
+    border-radius:5px;
+}
+.logout-btn:hover{
+    background-color: red;
+    color:white;
+}
+.streak-container{
+    position:absolute;
+    right:100px;
+    top:45%;
+    border-radius: 10px;
+    padding:30px 35px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+.streak-no{
+    width:100%;
+    height:auto;
+    padding:10px 0;
+    text-align: center;
+    border-radius:5px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.15);
+}
