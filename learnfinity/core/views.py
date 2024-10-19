@@ -52,3 +52,34 @@ def puzzle(request):
 
 def story(request):
     return render(request,'story.html')
+
+
+
+
+
+#sample
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import UserProfile  # Assuming you have a UserProfile model to store user data
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        country_code = request.POST['country_code']
+        
+        # Update user profile data
+        user_profile = request.user.profile  # Assuming user has a related profile
+        user_profile.name = name
+        user_profile.email = email
+        user_profile.phone = phone
+        user_profile.country_code = country_code
+        user_profile.save()
+
+        messages.success(request, 'Your profile has been updated.')
+        return redirect('profile_page')  # Redirect back to the profile page
+
+    return render(request, 'profile.html', {'user': request.user})

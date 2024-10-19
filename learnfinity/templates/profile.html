@@ -2,68 +2,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <link rel="stylesheet" href="{% static 'css/pstyle.css' %}"> <!-- Adjust if using Django's static files -->
+    <link rel="stylesheet" href="{% static 'css/pstyle.css' %}">
 </head>
 <body>
     <header>
-       <div class="navbar">
-        <div class="logo">
-            <h1>Learn<span class="danger">Finity</span></h1>
-        </div>
-       </div> 
-            
-        
+        <div class="navbar">
+            <div class="logo">
+                <h1>Learn<span class="danger">Finity</span></h1>
+            </div>
+        </div> 
     </header>
     
     <main>
+        <!-- Profile Section -->
         <section class="profile">
-            <h1>sample</h1>
-            <h2>Web Developer</h2>
-            <p>A brief bio about myself.</p>
-        </section>
-        
-        <section class="contact-info">
-            <h3>Contact Information</h3>
-            <p>Email: test@example.com</p>
-            <p>Phone: (123) 456-7890</p>
-            <div class="social-links">
-                <a href="#" class="social-icon">Facebook</a>
-                <a href="#" class="social-icon">Twitter</a>
-                <a href="#" class="social-icon">LinkedIn</a>
+            <div class="profile-header">
+               
+                <div class="profile-info">
+                    <form method="POST" action="{% url 'update_profile' %}">
+                        {% csrf_token %}
+                        <input type="text" name="name" placeholder="Your Name" value="{{ user.name }}" required>
+                        <input type="email" name="email" placeholder="Your Email" value="{{ user.email }}" required>
+                        <div class="phone-container">
+                            <select name="country_code" required>
+                                <option value="">Select Country</option>
+                                <option value="+1" {% if user.country_code == "+1" %}selected{% endif %}>USA (+1)</option>
+                                <option value="+44" {% if user.country_code == "+44" %}selected{% endif %}>UK (+44)</option>
+                                <option value="+91" {% if user.country_code == "+91" %}selected{% endif %}>India (+91)</option>
+                                <!-- Add more country codes as needed -->
+                            </select>
+                            <input type="tel" name="phone" placeholder="Your Phone Number" value="{{ user.phone }}" required>
+                        </div>
+                        <button type="submit" class="update-button">Update Profile</button>
+                    </form>
+                </div>
             </div>
         </section>
-        
+
+        <!-- Contact Information -->
+        <section class="contact-info">
+            <h3>Contact Information</h3>
+            <div class="contact-details">
+                <p><i class="fas fa-envelope"></i> Email: {{ user.email }}</p>
+                <p><i class="fas fa-phone"></i> Phone: {{ user.country_code }} {{ user.phone }}</p>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
         <section class="about-me">
             <h3>About Me</h3>
-            <p>Detailed information about myself goes here.</p>
+            <p>Here’s a detailed description about my background, skills, and career goals. I have a passion for web development and love to learn new things.</p>
         </section>
-        
+
+        <!-- Enrolled Courses Section -->
         <section class="projects">
             <h3>Enrolled Courses</h3>
             <div class="project-item">
-                <h4>Course Title</h4>
-                <p>Short description of the course.</p>
+                <h4>Course Title 1</h4>
+                <p>Brief description of the course.</p>
             </div>
-            <!-- Repeat for more projects -->
+            <div class="project-item">
+                <h4>Course Title 2</h4>
+                <p>Brief description of the course.</p>
+            </div>
         </section>
-        <script type="text/javascript">
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/6712c8eb4304e3196ad3eb9d/1iagm1mte';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-            })();
-            </script>
-        
-        
     </main>
-    
 
+    <footer>
+        <p>© 2024 LearnFinity. All rights reserved.</p>
+    </footer>
+
+    <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

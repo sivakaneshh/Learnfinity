@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import coursedashboard, index, math_problem_view, quiz_view,ai,cys,blockchain, login_view, register_view,profile_view,puzzle,story,video  # Import individual views
 
 urlpatterns = [
@@ -15,5 +16,12 @@ urlpatterns = [
     path('video/', video,name='video'),
     path('story/', story,name='story'),
     path('puzzle/', puzzle,name='puzzle'),
-    path('video/puzzle/', puzzle, name='puzzle'),               # Quiz page
+    path('video/puzzle/', puzzle, name='puzzle'),     
+    path('profile/update/', views.update_profile, name='update_profile'),                    # Quiz page
 ]
+
+
+
+
+ 
+
