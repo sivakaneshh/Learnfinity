@@ -18,6 +18,9 @@ urlpatterns = [
     path('puzzle/', puzzle,name='puzzle'),
     path('video/puzzle/', puzzle, name='puzzle'),     
     path('profile/update/', views.update_profile, name='update_profile'),                    # Quiz page
+    path('chat/', views.chatbot_view, name='chat'),
+   
+
 ]
 
 

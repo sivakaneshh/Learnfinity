@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,108 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Video Experience</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #2a2a72, #009ffd);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            position: relative;
-        }
-        header {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        .video-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            max-width: 960px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-        }
-        footer {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            text-align: center;
-        }
-        a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        a:hover {
-            color: #ffd700;
-        }
-        #playPauseBtn {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #playPauseBtn:hover {
-            background-color: #ff4c4c;
-        }
-        #interactivePanel {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(50, 50, 50, 0.9);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-            text-align: center;
-            z-index: 1000;
-            animation: fadeIn 0.5s;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/bot.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/video.css' %}" />
+    <script src="https://www.youtube.com/iframe_api"></script> <!-- YouTube API Script -->
 </head>
 <body>
     <header>
@@ -116,65 +18,159 @@
     <div class="video-container">
         <iframe 
             id="videoFrame"
-            src="https://www.youtube.com/embed/SSE4M0gcmvE?controls=1&autoplay=1&rel=0&mute=1" 
+            src="https://www.youtube.com/embed/SSE4M0gcmvE?enablejsapi=1&rel=0" 
             allowfullscreen>
         </iframe>
     </div>
     
-    <div id="interactivePanel">
-        <h2>Feeling Bored?</h2>
-        <p>Choose an option to engage:</p>
+    <div id="boredomPrompt" style="display: none;">
+        <h2>Are you feeling bored?</h2>
+        <p>Select an option to engage:</p>
         <a href="{% url 'puzzle' %}">
             <button id="playPuzzle">Play a Puzzle</button>
         </a>
         <a href="{% url 'story' %}">
             <button id="listenStory">Listen to a Story</button>
         </a>
-        <button id="closePanel">Close</button>
+        <button id="resumeVideo">No, Continue Video</button>
     </div>
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/6712c8eb4304e3196ad3eb9d/1iagm1mte';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-        </script>
+  
+    <!-- Chatbot Floating Button -->
+    <div class="chat-widget" onclick="toggleChat()">
+        <img src="{% static 'l.jpg' %}" alt="Chatbot Icon" id="chat-icon">
+    </div>
 
+    <!-- Chatbot Container -->
+    <div class="chat-container" id="chat-container" style="display: none;">
+        <div class="chat-header">
+            <span>BayMax</span>
+            <button onclick="toggleChat()">x</button>
+        </div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div id="loading" class="loading" style="display: none;">...</div>
+        <div class="input-area">
+            <input type="text" id="chat-input" placeholder="Ask me anything...">
+            <button id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
     <script>
-        const videoFrame = document.getElementById('videoFrame');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const interactivePanel = document.getElementById('interactivePanel');
-        let isPlaying = true;
+        let player;
         let boredomTimer;
+        const boredomPrompt = document.getElementById('boredomPrompt');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        let isPlaying = true;
+
+        // Initialize YouTube Player API
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('videoFrame', {
+                events: {
+                    'onReady': onPlayerReady,
+                },
+            });
+        }
+
+        // Player ready handler
+        function onPlayerReady() {
+            resetBoredomTimer();
+        }
+
+        // Boredom timer logic
+        function resetBoredomTimer() {
+            clearTimeout(boredomTimer);
+            boredomTimer = setTimeout(showBoredomPrompt, 10000); // 10 seconds of inactivity
+        }
+
+        // Show boredom prompt and pause video
+        function showBoredomPrompt() {
+            player.pauseVideo(); // Pause the video
+            boredomPrompt.style.display = 'block'; // Show boredom prompt
+            isPlaying = false; // Update state
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Update button
+        }
+
+        // Detect user interaction (mouse or key activity)
+        function userInteractionDetected() {
+            resetBoredomTimer(); // Reset timer whenever user interacts
+        }
 
         // Play/Pause functionality
-        playPauseBtn.addEventListener('click', function() {
+        playPauseBtn.addEventListener('click', function () {
             if (isPlaying) {
-                videoFrame.src += "&autoplay=0"; // Stop autoplay
+                player.pauseVideo(); // Pause the video
                 playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
             } else {
-                videoFrame.src += "&autoplay=1"; // Resume autoplay
+                player.playVideo(); // Play the video
                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }
             isPlaying = !isPlaying;
         });
 
-        // Show interactive panel after a certain period of time
-        function checkBoredom() {
-            interactivePanel.style.display = 'block'; // Show interactive options
+        // Resume video from boredom prompt
+        document.getElementById('resumeVideo').addEventListener('click', function () {
+            boredomPrompt.style.display = 'none'; // Hide prompt
+            player.playVideo(); // Resume video
+            isPlaying = true; // Update state
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Update button
+            resetBoredomTimer(); // Restart boredom timer
+        });
+
+        // Chatbot toggle visibility
+        function toggleChat() {
+            const chatContainer = document.getElementById('chat-container');
+            const chatWidget = document.querySelector('.chat-widget');
+
+            if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+                chatContainer.style.display = 'flex'; // Show the chatbot UI
+                setTimeout(() => {
+                    chatContainer.style.transform = 'scale(1)'; // Smooth animation
+                }, 10);
+                chatWidget.style.display = 'none'; // Hide the widget
+            } else {
+                chatContainer.style.transform = 'scale(0)'; // Shrink chatbot UI
+                setTimeout(() => {
+                    chatContainer.style.display = 'none'; // Hide chatbot UI
+                    chatWidget.style.display = 'flex'; // Show the widget
+                }, 300);
+            }
         }
 
-        // Start boredom timer
-        boredomTimer = setTimeout(checkBoredom, 10000); // 10 seconds
+        // Send message to chatbot and fetch response (simulated)
+        async function sendMessage() {
+            const input = document.getElementById("chat-input");
+            const messages = document.getElementById("chat-messages");
+            const loading = document.getElementById("loading");
+            const userMessage = input.value;
 
-        // Button actions
-        document.getElementById('closePanel').addEventListener('click', function() {
-            interactivePanel.style.display = 'none'; // Close the panel
-        });
+            if (!userMessage.trim()) return;
+
+            // Add user message to chat
+            const userMessageDiv = document.createElement("div");
+            userMessageDiv.classList.add("message", "user-message");
+            userMessageDiv.textContent = userMessage;
+            messages.appendChild(userMessageDiv);
+
+            // Clear input and scroll
+            input.value = "";
+            messages.scrollTop = messages.scrollHeight;
+
+            // Simulate API call
+            loading.style.display = "block";
+            const response = await fetch(`/chat?message=${encodeURIComponent(userMessage)}`);
+            const data = await response.json();
+            loading.style.display = "none";
+
+            // Add assistant's message
+            const assistantMessageDiv = document.createElement("div");
+            assistantMessageDiv.classList.add("message", "assistant-message");
+            assistantMessageDiv.textContent = data.response || "Sorry, I didn't understand that.";
+            messages.appendChild(assistantMessageDiv);
+            messages.scrollTop = messages.scrollHeight  ;
+        }
+
+        // Attach boredom detection to user interaction events
+        window.addEventListener('mousemove', userInteractionDetected);
+        window.addEventListener('keydown', userInteractionDetected);
     </script>
 </body>
 </html>

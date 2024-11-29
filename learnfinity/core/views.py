@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import MathProblem
 from django.http import JsonResponse
-
+import ollama
 
 
 
@@ -53,6 +53,8 @@ def puzzle(request):
 def story(request):
     return render(request,'story.html')
 
+def chatbot(request):
+    return render(request, 'chatbot.html')
 
 
 
@@ -83,3 +85,26 @@ def update_profile(request):
         return redirect('profile_page')  # Redirect back to the profile page
 
     return render(request, 'profile.html', {'user': request.user})
+
+
+
+
+
+
+def chatbot_view(request):
+    # Check if the message is provided in the GET request
+    user_message = request.GET.get('message', '')
+
+    if user_message:
+        # Format the history (you can maintain the chat history as needed)
+        system_prompt = "Behave like a chatgpt."
+        chat_history = [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_message}]
+
+        # Call the Ollama API to get the response
+        response = ollama.chat(model='llama2', messages=chat_history)
+        assistant_message = response["message"]["content"]
+
+        # Return the response in JSON format
+        return JsonResponse({"response": assistant_message})
+
+    return JsonResponse({"error": "No message provided"}, status=400)

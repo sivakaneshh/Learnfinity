@@ -7,6 +7,7 @@
     <title>LearnFinity || Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/coursestyle.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bot.css' %}" />
   </head>
   <body>
     <header>
@@ -167,19 +168,106 @@
         </div>
       </div>
     </section>
+    
+               
+       <!-- Chatbot Floating Button -->
+       <div class="chat-widget" onclick="toggleChat()">
+        <img src="{% static 'l.jpg' %}" alt="Chatbot Icon" id="chat-icon">
+      </div>
+    
+      <!-- Chatbot Container -->
+      <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+          <span>BayMax</span>
+          <button onclick="toggleChat()">x</button></right>
+        </div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div id="loading" class="loading" style="display: none;">...</div>
+        <div class="input-area">
+          <input type="text" id="chat-input" placeholder="Ask me anything...">
+          <button id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+      </div>
 
-    <script type="text/javascript">
-      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-      (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true;
-      s1.src='https://embed.tawk.to/6712c8eb4304e3196ad3eb9d/1iagm1mte';
-      s1.charset='UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
-      })();
-    </script>
-
+      
+    
+      <script>
+        // Toggle chat window visibility
+        function toggleChat() {
+          const chatContainer = document.getElementById("chat-container");
+          const chatWidget = document.querySelector(".chat-widget");
+    
+          if (chatContainer.style.display === "none" || chatContainer.style.display === "") {
+            chatContainer.style.display = "flex";  // Show the chatbot UI
+            setTimeout(() => {
+              chatContainer.style.transform = "scale(1)";  // Smooth animation
+            }, 10);
+            chatWidget.style.display = "none";  // Hide the widget when chatbot is open
+          } else {
+            chatContainer.style.transform = "scale(0)";  // Shrink the chatbot UI
+            setTimeout(() => {
+              chatContainer.style.display = "none";  // Hide the chatbot UI
+              chatWidget.style.display = "flex";  // Show the widget again
+            }, 300);
+          }
+        }
+    
+        // Function to send message and get response from API
+        async function sendMessage() {
+          const input = document.getElementById("chat-input");
+          const messages = document.getElementById("chat-messages");
+          const loading = document.getElementById("loading");
+          const userMessage = input.value;
+    
+          if (!userMessage.trim()) return;
+    
+          // Show loading spinner
+          loading.style.display = "block";
+    
+          // Add user message to chat
+          const userMessageDiv = document.createElement("div");
+          userMessageDiv.classList.add("message", "user-message");
+          userMessageDiv.textContent = userMessage;
+          messages.appendChild(userMessageDiv);
+    
+          input.value = ""; // Clear the input field
+          messages.scrollTop = messages.scrollHeight;
+    
+          // Simulate an API call (replace this with actual API call in production)
+          const response = await fetch(`/chat?message=${encodeURIComponent(userMessage)}`);
+          const data = await response.json();
+    
+          // Hide loading spinner
+          loading.style.display = "none";
+    
+          // Display assistant's response
+          const assistantMessageDiv = document.createElement("div");
+          assistantMessageDiv.classList.add("message", "assistant-message");
+          assistantMessageDiv.textContent = data.response || "Sorry, I didn't understand that.";
+          messages.appendChild(assistantMessageDiv);
+    
+          messages.scrollTop = messages.scrollHeight;
+        }
+    
+        // Sample data for chatbot
+        async function getResponse(message) {
+          // Simulate AI response with predefined replies
+          const responses = {
+            "hello": "Hi there! How can I help you today?",
+            "how are you": "I'm doing great, thank you for asking!",
+            "bye": "Goodbye! Have a nice day!",
+          };
+    
+          return responses[message.toLowerCase()] || "I didn't understand that.";
+        }
+    
+        // Example of backend handling
+        async function fetchData(message) {
+          // Placeholder for backend API call
+          return { response: await getResponse(message) };
+        }
+      </script>
+    
     <script>
       const dropDown = document.querySelectorAll('.drop-down-btn')
       dropDown.forEach((el) => {
@@ -209,5 +297,8 @@
       })
       
     </script>
+    
+    <style>
+    
   </body>
 </html>
